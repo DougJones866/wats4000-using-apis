@@ -1,15 +1,13 @@
 <template>
-  <div class="rhymesaurus">
-    <h2>Rhymesaurus: The Rhyming Thesaurus</h2>
+  <div class="adjfornoun">
+    <h2>Adjective</h2>
     <p>
-      <router-link to="/adjfornoun">Adjective For Noun</router-link>
+      <router-link to="/">Rhymesaurus</router-link>
     </p>
-
     <form v-on:submit.prevent="findWords">
       <p>
-        Find rhymes for
-        <input type="text" v-model="rhyme"> related to
-        <input type="text" v-model="phrase">
+        Find an adjective from a given noun
+        <input type="text" v-model="noun">
         <button type="submit">Search</button>
       </p>
     </form>
@@ -38,13 +36,12 @@
 import axios from "axios";
 
 export default {
-  name: "Rhymesaurus",
+  name: "adjfornoun",
   data() {
     return {
       results: null,
-      errors: [],
-      phrase: "",
-      rhyme: ""
+      noun: "",
+      errors: []
     };
   },
   methods: {
@@ -52,8 +49,7 @@ export default {
       axios
         .get("https://api.datamuse.com/words", {
           params: {
-            ml: this.phrase,
-            rel_rhy: this.rhyme
+            rel_jjb: this.noun
           }
         })
         .then(response => {
@@ -69,7 +65,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.rhymesaurus {
+.adjfornoun {
   font-size: 1.4rem;
 }
 
